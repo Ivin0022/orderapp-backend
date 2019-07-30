@@ -1,0 +1,9 @@
+{
+    "python.linting.pylintArgs": [
+        "--load-plugins=pylint_django",
+    ],
+    "editor.formatOnSave": true,
+    "debug.openDebug": "openOnDebugBreak",
+    "files.autoSave": "onFocusChange",
+    "python.pythonPath": "env/bin/python3.6"
+}
