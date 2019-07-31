@@ -6,4 +6,12 @@
     "debug.openDebug": "openOnDebugBreak",
     "files.autoSave": "onFocusChange",
     "python.pythonPath": "env/bin/python3.6"
+    "files.associations": {
+        "**/templates/*.html": "django-html",
+        "**/templates/*": "django-txt",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+    },
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    },
 }

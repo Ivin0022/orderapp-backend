@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'inventory.apps.InventoryConfig',
     'patients.apps.PatientsConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
