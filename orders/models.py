@@ -20,3 +20,6 @@ class Order(models.Model):
     time_of_fulfilment = models.DateTimeField('order fulfiled')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES)
     items = models.ManyToManyField(Inventory)
+
+    def __str__(self):
+        return f'{self.patient.name} [{self.patient.case_no}]'
