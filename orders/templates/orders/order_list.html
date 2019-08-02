@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Orders</title>
+    <style>
+        span[data-text="fulfiled"]:before {
+            content: attr(data-text);
+            color: white;
+            background-color: green;
+            padding: 3px;
+        }
+
+        span[data-text="placed"]:before {
+            content: attr(data-text);
+            color: white;
+            background-color: orange;
+            padding: 3px;
+        }
+    </style>
 </head>
+
 <body>
     <h1>Orders</h1>
 
-    {% for i in object_list %}
-        
-        {{ i }}
+    {% for order in order_list %}
+    name: {{ order.patient.name }} <br>
+    case no: {{ order.patient.case_no }} <br>
+    status: <span data-text="{{ order.get_status_display }}"></span> <br>
 
+    <a href="{% url 'orders:details' order.pk%}">
+        <small>more details...</small>
+    </a>
+    <hr>
     {% endfor %}
 </body>
+
 </html>
