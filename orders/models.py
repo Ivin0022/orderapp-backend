@@ -23,11 +23,15 @@ class Order(models.Model):
     time_of_placement = models.DateTimeField('order placed', editable=False)
     time_of_fulfilment = models.DateTimeField(
         'order fulfiled',
+        editable=False,
         blank=True,
         null=True
     )
-
-    status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+    status = models.CharField(
+        max_length=1,
+        choices=STATUS_CHOICES,
+        default=STAUTS_PLACED
+    )
     items = models.ManyToManyField(Inventory)
 
     def save(self, *args, **kwargs):
@@ -42,7 +46,6 @@ class Order(models.Model):
             # if id doesn't exists it will be None
 
             self.time_of_placement = timezone.now()
-            self.status = self.STAUTS_PLACED
 
         elif self.status == self.STAUTS_FULFILED:
             # checking to see if the status of the
