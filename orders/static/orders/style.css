@@ -1,0 +1,33 @@
+span[data-text="fulfiled"]:before {
+    content: attr(data-text);
+    color: white;
+    background-color: green;
+    padding: 3px;
+}
+
+span[data-text="placed"]:before {
+    content: attr(data-text);
+    color: white;
+    background-color: orange;
+    padding: 3px;
+}
+
+.btn {
+    background-color: white;
+    display: inline-block;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+    border-radius: 10px;
+    padding: 15px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    display: inline-block;
+    border: 2px solid white;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-decoration: none;
+}
