@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'inventory.apps.InventoryConfig',
     'patients.apps.PatientsConfig',
     'orders.apps.OrdersConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
