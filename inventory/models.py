@@ -19,7 +19,7 @@ class Inventory(models.Model):
     """ docstring for Inventory """
 
     itemType = models.ForeignKey(
-        Category, on_delete=models.CASCADE)
+        Category, on_delete=models.CASCADE, related_name='items')
     item = models.CharField(max_length=25)
 
     def __str__(self):

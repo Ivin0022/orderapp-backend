@@ -4,14 +4,16 @@ from .models import Inventory, Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Category
-        fields = ['url', 'itemType']
+        fields = ['url', 'items', 'itemType']
+        depth = 1
 
 
 class InventorySerializer(serializers.ModelSerializer):
-    itemType = CategorySerializer(read_only=True)
 
     class Meta:
         model = Inventory
         fields = ['url', 'item', 'itemType']
+        depth = 1
