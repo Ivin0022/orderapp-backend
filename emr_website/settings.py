@@ -28,12 +28,11 @@ DEBUG = True
 
 with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     s.connect(("8.8.8.8", 80))
-    ip = s.getsockname()
-    print(ip)
+    ip = s.getsockname()[0]
+    print(f'\nGo to this on other machine http://{ip}:8000/\n')
 ALLOWED_HOSTS = [
     '127.0.0.1',
     str(ip)
-    # '192.168.1.4'
 ]
 
 
