@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import socket
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,8 +26,13 @@ SECRET_KEY = 'ft5lroo4!+w3c@n%+_aho*@0*km6xg4na+k9n%sn6=*d1m5-%l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+    s.connect(("8.8.8.8", 80))
+    ip = s.getsockname()[0]
+    print(f'\nGo to this on other machine http://{ip}:8000/\n')
 ALLOWED_HOSTS = [
-    # '192.168.1.4'
+    '127.0.0.1',
+    str(ip)
 ]
 
 
