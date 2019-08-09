@@ -8,6 +8,13 @@ span[data-text="fulfilled"]:before {
 span[data-text="placed"]:before {
     content: attr(data-text);
     color: white;
+    background-color: red;
+    padding: 3px;
+}
+
+span[data-text="seen"]:before {
+    content: attr(data-text);
+    color: white;
     background-color: orange;
     padding: 3px;
 }
