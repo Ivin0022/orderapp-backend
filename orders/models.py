@@ -34,6 +34,19 @@ class Order(models.Model):
     )
     items = models.ManyToManyField(Inventory)
 
+    @classmethod
+    def set_status(cls, pk, status):
+        """ setter function for status, was declared to be
+            more inline "Fat Models, Thin Views" concept.
+            update the status here instead of the Views make 
+            it more reusable, without repeating code
+            update query doesn't call the save function but 
+            instead is directly set using SQL query. so, all 
+            the code in the overridden save() isn't called
+            hence preventing unwanted/unforeseen side effect
+        """
+        cls.objects.filter(pk=pk).update(status=status)
+
     def save(self, *args, **kwargs):
         ''' This method is called every time an object is saved 
             to the datebase, we are overriding it to automatically 

@@ -14,9 +14,7 @@ class OrderDetailView(DetailView):
 
 
 def hander(request, pk):
-    order = get_object_or_404(Order, pk=pk)
-    order.status = Order.STAUTS_FULFILED
-    order.save()
+    Order.set_status(pk, Order.STAUTS_FULFILED)
     return redirect('orders:home')
 
 
