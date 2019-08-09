@@ -12,17 +12,17 @@ class Order(models.Model):
 
     STAUTS_PLACED = 'p'
     STAUTS_SEEN = 's'
-    STAUTS_FULFILED = 'f'
+    STAUTS_FULFILLED = 'f'
     STATUS_CHOICES = (
         (STAUTS_PLACED, 'placed'),
         (STAUTS_SEEN, 'seen'),
-        (STAUTS_FULFILED, 'fulfiled'),
+        (STAUTS_FULFILLED, 'fulfilled'),
     )
 
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     time_of_placement = models.DateTimeField('order placed', editable=False)
-    time_of_fulfilment = models.DateTimeField(
-        'order fulfiled',
+    time_of_fulfillment = models.DateTimeField(
+        'order fulfilled',
         editable=False,
         blank=True,
         null=True
@@ -34,10 +34,23 @@ class Order(models.Model):
     )
     items = models.ManyToManyField(Inventory)
 
+    @classmethod
+    def set_status(cls, pk, status):
+        """ setter function for status, was declared to be
+            more inline "Fat Models, Thin Views" concept.
+            update the status here instead of the Views make 
+            it more reusable, without repeating code
+            update query doesn't call the save function but 
+            instead is directly set using SQL query. so, all 
+            the code in the overridden save() isn't called
+            hence preventing unwanted/unforeseen side effect
+        """
+        cls.objects.filter(pk=pk).update(status=status)
+
     def save(self, *args, **kwargs):
         ''' This method is called every time an object is saved 
             to the datebase, we are overriding it to automatically 
-            enter the time of creation, time of fulfilment, set the
+            enter the time of creation, time of fulfillment, set the
             status to placed
         '''
 
@@ -47,11 +60,11 @@ class Order(models.Model):
 
             self.time_of_placement = timezone.now()
 
-        elif self.status == self.STAUTS_FULFILED:
+        elif self.status == self.STAUTS_FULFILLED:
             # checking to see if the status of the
-            # order as changed to fulfiled
+            # order as changed to fulfilled
 
-            self.time_of_fulfilment = timezone.now()
+            self.time_of_fulfillment = timezone.now()
 
         return super().save(*args, **kwargs)
 

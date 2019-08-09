@@ -12,11 +12,25 @@ class OrderListView(ListView):
 class OrderDetailView(DetailView):
     model = Order
 
+    def get_context_data(self, **kwargs):
+        """ used to update the status to seen when the details
+            of the current object are view
+            basically a hack so i don't have to write a 
+            function based view to handle the both rendering
+            the details and updating status 
+        """
+        current_object: Order = kwargs['object']
+
+        # don't set the status to seen if already fulfilled
+        print(current_object.status)
+        if current_object.status != Order.STAUTS_FULFILLED:
+            Order.set_status(current_object.pk, Order.STAUTS_SEEN)
+
+        return super().get_context_data(**kwargs)
+
 
 def hander(request, pk):
-    order = get_object_or_404(Order, pk=pk)
-    order.status = Order.STAUTS_FULFILED
-    order.save()
+    Order.set_status(pk, Order.STAUTS_FULFILLED)
     return redirect('orders:home')
 
 
