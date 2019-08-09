@@ -14,7 +14,7 @@ class OrderDetailView(DetailView):
 
 
 def hander(request, pk):
-    Order.set_status(pk, Order.STAUTS_FULFILED)
+    Order.set_status(pk, Order.STAUTS_FULFILLED)
     return redirect('orders:home')
 
 

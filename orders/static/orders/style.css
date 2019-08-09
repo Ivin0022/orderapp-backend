@@ -1,4 +1,4 @@
-span[data-text="fulfiled"]:before {
+span[data-text="fulfilled"]:before {
     content: attr(data-text);
     color: white;
     background-color: green;
