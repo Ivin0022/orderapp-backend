@@ -40,7 +40,9 @@ class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
 
-    def list(self, request, *args, **kwargs):
-        queryset = Order.objects.all()
-        serializer = OrderListSerializer(queryset, many=True)
-        return Response(serializer.data)
+    # overriding this function instead of list()
+    # since the only this changing is the serializer class
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return OrderListSerializer
+        return super().get_serializer_class()
