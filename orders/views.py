@@ -42,7 +42,8 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     # overriding this function instead of list()
     # since the only this changing is the serializer class
+    # retrive use the same serializer as list
     def get_serializer_class(self):
-        if self.action == 'list':
+        if self.action in ('list', 'retrieve'):
             return OrderListSerializer
         return super().get_serializer_class()
