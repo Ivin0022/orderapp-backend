@@ -4,6 +4,11 @@ from .models import Inventory, Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    items = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='item'
+    )
 
     class Meta:
         model = Category
