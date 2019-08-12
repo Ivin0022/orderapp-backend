@@ -6,10 +6,10 @@ from django.db import models
 class Category(models.Model):
     """ docstring for Category """
 
-    itemType = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.itemType
+        return self.name
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -18,12 +18,12 @@ class Category(models.Model):
 class Inventory(models.Model):
     """ docstring for Inventory """
 
-    itemType = models.ForeignKey(
+    category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name='items')
-    item = models.CharField(max_length=25)
+    name = models.CharField(max_length=25)
 
     def __str__(self):
-        return f'{self.item} ({self.itemType})'
+        return f'{self.name} ({self.category})'
 
     class Meta:
         verbose_name_plural = "Inventories"

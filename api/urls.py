@@ -8,7 +8,7 @@ from orders.views import OrderViewSet
 router = routers.DefaultRouter()
 router.register('order', OrderViewSet)
 router.register('patient', PatientViewSet)
-router.register('inventory', InventoryViewSet)
+router.register('items', InventoryViewSet)
 router.register('category', CategoryViewSet)
 
 
