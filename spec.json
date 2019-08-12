@@ -1,0 +1,33 @@
+[
+    // read view 
+    {
+        "id": 3,
+        "time_of_placement": "2019-08-02T19:02:40.837612+05:30",
+        "time_of_fulfillment": null,
+        "status": "f",
+        "patient": {
+            "id": 2,
+            "name": "chithira",
+            "age": 24,
+            "case_no": "190002"
+        },
+        "items": [{
+            "id": 2,
+            "item": "maruthi 800",
+            "itemType": {
+                "id": 2,
+                "itemType": "cars"
+            }
+        }]
+    },
+
+    // write view
+    {
+
+        "patient": 3,
+        "items": [
+            2,
+            3
+        ]
+    }
+]
