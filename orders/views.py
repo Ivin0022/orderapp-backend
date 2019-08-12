@@ -1,8 +1,10 @@
 from django.views.generic import ListView, DetailView, UpdateView
 from django.shortcuts import redirect, get_object_or_404
 from rest_framework import viewsets
+from rest_framework.response import Response
 from .models import Order
-from .serializers import OrderSerializer
+from .serializers import OrderSerializer, OrderListSerializer
+from patients.serializers import PatientSerializer
 
 
 class OrderListView(ListView):
@@ -37,3 +39,11 @@ def hander(request, pk):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+    # overriding this function instead of list()
+    # since the only this changing is the serializer class
+    # retrive use the same serializer as list
+    def get_serializer_class(self):
+        if self.action in ('list', 'retrieve'):
+            return OrderListSerializer
+        return super().get_serializer_class()

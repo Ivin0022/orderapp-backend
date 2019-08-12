@@ -14,15 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from .views import InventoryList, InventoryViewSet, CategoryViewSet
+from .views import InventoryList
 
-from rest_framework import routers
-
-router = routers.DefaultRouter()
-router.register('inventory', InventoryViewSet)
-router.register('category', CategoryViewSet)
 
 urlpatterns = [
     path('', InventoryList.as_view(), name='home'),
-    path('api/', include(router.urls))
 ]
