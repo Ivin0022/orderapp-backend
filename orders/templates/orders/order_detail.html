@@ -19,8 +19,8 @@
     <ul>
         {% for item in order.items.all %}
         <li>
-            {{ item.item }}
-            type: {{ item.itemType }}
+            {{ item.name }}
+            type: {{ item.category }}
         </li>
         {% endfor %}
     </ul>
