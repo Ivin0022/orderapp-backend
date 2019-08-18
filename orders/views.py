@@ -24,7 +24,6 @@ class OrderDetailView(DetailView):
         current_object: Order = kwargs['object']
 
         # don't set the status to seen if already fulfilled
-        print(current_object.status)
         if current_object.status != Order.STAUTS_FULFILLED:
             Order.set_status(current_object.pk, Order.STAUTS_SEEN)
 
