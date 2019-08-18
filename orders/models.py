@@ -45,7 +45,12 @@ class Order(models.Model):
             the code in the overridden save() isn't called
             hence preventing unwanted/unforeseen side effect
         """
-        cls.objects.filter(pk=pk).update(status=status)
+
+        time_of_fulfillment = timezone.now() if status == cls.STAUTS_FULFILLED else None
+        cls.objects.filter(pk=pk).update(
+            status=status,
+            time_of_fulfillment=time_of_fulfillment
+        )
 
     def save(self, *args, **kwargs):
         ''' This method is called every time an object is saved 
@@ -54,17 +59,10 @@ class Order(models.Model):
             status to placed
         '''
 
+        # checking to see if object exists
+        # if id doesn't exists it will be None
         if self.id is None:
-            # checking to see if object exists
-            # if id doesn't exists it will be None
-
             self.time_of_placement = timezone.now()
-
-        elif self.status == self.STAUTS_FULFILLED:
-            # checking to see if the status of the
-            # order as changed to fulfilled
-
-            self.time_of_fulfillment = timezone.now()
 
         return super().save(*args, **kwargs)
 
