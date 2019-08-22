@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'patients.apps.PatientsConfig',
     'orders.apps.OrdersConfig',
     'rest_framework',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
