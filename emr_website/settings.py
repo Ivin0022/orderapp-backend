@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import socket
-
+import django_heroku 
+import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,13 +27,17 @@ SECRET_KEY = 'ft5lroo4!+w3c@n%+_aho*@0*km6xg4na+k9n%sn6=*d1m5-%l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-    s.connect(("8.8.8.8", 80))
-    ip = s.getsockname()[0]
-    print(f'\nGo to this on other machine http://{ip}:8000/\n')
+# with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+#     s.connect(("8.8.8.8", 80))
+#     ip = s.getsockname()[0]
+#     print(f'\nGo to this on other machine http://{ip}:8000/\n')
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    str(ip)
+    '0.0.0.0', 
+    'localhost',
+    'kochilatt.herokuapp.com'
+
+    # str(ip)
 ]
 
 
@@ -50,6 +55,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'rest_framework',
     'phonenumber_field',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'emr_website.urls'
@@ -93,6 +100,8 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -131,6 +140,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+#location where django collect all static files
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+# location where you will store your static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'emr_website/static')
+]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -139,3 +157,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny'
     ]
 }
+
+django_heroku.settings(locals())
