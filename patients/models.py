@@ -10,12 +10,12 @@ class Patient(models.Model):
     name = models.CharField(max_length=50)
     age = models.IntegerField('Age')
     case_no = models.CharField(max_length=6, unique=True)
-    next_of_kin = models.CharField(max_length=50, null=True)
+    next_of_kin = models.CharField(max_length=50, null=True, blank=True)
     date = models.DateField('date', default=timezone.now())
-    occupation = models.CharField(max_length=50, null=True)
-    mobile = PhoneNumberField()
-    address = models.TextField(default='')
-    email = models.EmailField(null=True)
+    occupation = models.CharField(max_length=50, null=True, blank=True)
+    mobile = PhoneNumberField(null=True, blank=True)
+    address = models.TextField(default='', blank=True)
+    email = models.EmailField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.name} ({self.age})'
