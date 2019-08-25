@@ -5,7 +5,7 @@
     "editor.formatOnSave": true,
     "debug.openDebug": "openOnDebugBreak",
     "files.autoSave": "onFocusChange",
-    "python.pythonPath": "env/bin/python3.6",
+    "python.pythonPath": "env\\Scripts\\python.exe",
     "terminal.integrated.fontFamily": "monospace",
     "files.exclude": {
         "**/env": true,
