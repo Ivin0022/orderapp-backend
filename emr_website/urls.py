@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy
 
+admin.site.site_header = ugettext_lazy('Kochilatt')
+admin.site.site_title = ugettext_lazy('Kochilatt')
+admin.site.index_title = ugettext_lazy('Home')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', admin.site.urls),
     path('inventory/', include('inventory.urls'), name='inventory'),
     path('patients/', include('patients.urls'), name='patients'),
     path('orders/', include('orders.urls'), name='orders'),
